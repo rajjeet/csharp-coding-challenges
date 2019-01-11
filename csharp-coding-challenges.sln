@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coding-Challenges-Tests", "Coding-Challenges-Tests\Coding-Challenges-Tests.csproj", "{03A1629F-F2DE-4CEC-9081-B43DF555D1CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringChallenges", "StringChallenges\StringChallenges.csproj", "{82C9A87F-DE2B-44B4-9346-D6BC31BF76C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,6 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03A1629F-F2DE-4CEC-9081-B43DF555D1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C9A87F-DE2B-44B4-9346-D6BC31BF76C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C9A87F-DE2B-44B4-9346-D6BC31BF76C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C9A87F-DE2B-44B4-9346-D6BC31BF76C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C9A87F-DE2B-44B4-9346-D6BC31BF76C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
