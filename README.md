@@ -7,6 +7,6 @@
 
 Challenges
 ---
-##### Strings
-1. *DuplicateFinder.cs* - Find all duplicate characters in the provided string
-2. *AnagramDetector.cs* - Find if the two input strings are anagrams
+##### Strings (*StringUtils.cs*)
+1. *FindDuplicate* - Find all duplicate characters in the provided string
+2. *DetectAnagram* - Find if the two input strings are anagrams
