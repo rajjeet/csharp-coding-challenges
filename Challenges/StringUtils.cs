@@ -1,11 +1,20 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
 namespace Challenges
 {
     public static class StringUtils
     {
+
+        public static char FindFirstNonRepeatingCharacter(string input)
+        {            
+            var charArray = input.ToCharArray();
+            return charArray.GroupBy(i => i).First(g => g.Count() == 1).Key;
+        }
+
         public static bool DetectAnagram(string word1, string word2)
         {
             var word1CharArray = word1.ToLower().Trim().ToCharArray();
@@ -35,6 +44,28 @@ namespace Challenges
 
     public class StringUtilsTests
     {
+        [Test]
+        public void FindFirstNonRepeatingCharacter_WhenPassedStringWithNonRepeatingCharacterAsFirstCharacter_ReturnsFirstCharacter()
+        {
+            const string testSample = "cotton";
+            const char expected = 'c';
+
+            var result = StringUtils.FindFirstNonRepeatingCharacter(testSample);
+            
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void FindFirstNonRepeatingCharacter_WhenPassedStringWithNonRepeatingCharacterAsNonFirstCharacter_ReturnsFirstNonRepeatingCharacter()
+        {
+            const string testSample = "assimilate";
+            const char expected = 'm';
+
+            var result = StringUtils.FindFirstNonRepeatingCharacter(testSample);
+            
+            Assert.AreEqual(expected, result);
+        }
+        
         [Test]
         public void DetectAnagram_WhenValidAnagramWordsPassed_ShouldReturnTrue()
         {
