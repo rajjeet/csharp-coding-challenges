@@ -14,3 +14,4 @@ Challenges
 4. *ReverseStringIteratively* - Reverse a string using iterations
 5. *ReverseStringRecursively* - Reverse a string using recursion
 6. *ContainsOnlyDigits* - Checks if given string only contains digits
+7. *ContainsOnlyDigitsUsingRegex* - Checks if given string only contains digits using Regular Expressions

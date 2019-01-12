@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace Challenges
@@ -67,10 +68,39 @@ namespace Challenges
             return charArray.All(c => c >= '0' && c <= '9');
             
         }
+
+        public static bool ContainsOnlyDigitsUsingRegex(string input)
+        {
+            const string expr = @"^\d+$";
+            return Regex.IsMatch(input, expr);
+            
+        }
     }
 
     public class StringUtilsTests
     {
+        [Test]
+        public void ContainsOnlyDigitsUsingRegex_ReturnsTrue_WhenStringWithOnlyDigitsIsProvided()
+        {
+            const string input = "123456";
+            const bool expected = true;
+
+            var result = StringUtils.ContainsOnlyDigitsUsingRegex(input);
+            
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void ContainsOnlyDigitsUsingRegex_ReturnsFalse_WhenStringWitDigitsAndAlphabetsIsProvided()
+        {
+            const string input = "123456a";
+            const bool expected = false;
+
+            var result = StringUtils.ContainsOnlyDigitsUsingRegex(input);
+            
+            Assert.AreEqual(expected, result);
+        }   
+        
         [Test]
         public void ContainsOnlyDigits_ReturnsTrue_WhenStringWithOnlyDigitsIsProvided()
         {
