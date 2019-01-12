@@ -58,7 +58,7 @@ namespace Challenges
         public static string ReverseStringRecursively(string input)
         {
             if (input.Length < 2) return input;
-                                    
+
             return string.Concat(ReverseStringRecursively(input.Substring(1)), input[0]);
         }
 
@@ -66,19 +66,53 @@ namespace Challenges
         {
             var charArray = input.ToCharArray();
             return charArray.All(c => c >= '0' && c <= '9');
-            
         }
 
         public static bool ContainsOnlyDigitsUsingRegex(string input)
         {
             const string expr = @"^\d+$";
             return Regex.IsMatch(input, expr);
-            
+        }
+
+        public static int CountVowels(string input)
+        {
+            var charArray = input.ToLower().ToCharArray();
+            var vowels = new char[] {'a', 'e', 'i', 'o', 'u'};
+            return charArray.Count(c => vowels.Contains(c));
+        }
+
+        public static int CountConstants(string input)
+        {
+            var charArray = input.ToLower().ToCharArray();
+            var vowels = new char[] {'a', 'e', 'i', 'o', 'u'};
+            return charArray.Count(c => !vowels.Contains(c));
         }
     }
 
     public class StringUtilsTests
     {
+        [Test]
+        public void CountConstants_ReturnsConstantCount_WhenValidStringIsProvided()
+        {
+            const string input = "Awesomeness";
+            const int expected = 6;
+
+            var result = StringUtils.CountConstants(input);
+
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void CountVowels_ReturnsVowelCount_WhenValidStringIsProvided()
+        {
+            const string input = "Awesomeness";
+            const int expected = 5;
+
+            var result = StringUtils.CountVowels(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
         [Test]
         public void ContainsOnlyDigitsUsingRegex_ReturnsTrue_WhenStringWithOnlyDigitsIsProvided()
         {
@@ -86,10 +120,10 @@ namespace Challenges
             const bool expected = true;
 
             var result = StringUtils.ContainsOnlyDigitsUsingRegex(input);
-            
+
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void ContainsOnlyDigitsUsingRegex_ReturnsFalse_WhenStringWitDigitsAndAlphabetsIsProvided()
         {
@@ -97,10 +131,10 @@ namespace Challenges
             const bool expected = false;
 
             var result = StringUtils.ContainsOnlyDigitsUsingRegex(input);
-            
+
             Assert.AreEqual(expected, result);
-        }   
-        
+        }
+
         [Test]
         public void ContainsOnlyDigits_ReturnsTrue_WhenStringWithOnlyDigitsIsProvided()
         {
@@ -108,10 +142,10 @@ namespace Challenges
             const bool expected = true;
 
             var result = StringUtils.ContainsOnlyDigits(input);
-            
+
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void ContainsOnlyDigits_ReturnsFalse_WhenStringWitDigitsAndAlphabetsIsProvided()
         {
@@ -119,10 +153,10 @@ namespace Challenges
             const bool expected = false;
 
             var result = StringUtils.ContainsOnlyDigits(input);
-            
+
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void ReverseStringRecursively_ReversesStringUsingRecursion_WhenStringWithEvenLengthIsProvided()
         {
@@ -133,7 +167,7 @@ namespace Challenges
 
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void ReverseStringRecursively_ReversesStringUsingRecursion_WhenStringWithOddLengthIsProvided()
         {

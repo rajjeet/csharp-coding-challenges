@@ -15,3 +15,5 @@ Challenges
 5. *ReverseStringRecursively* - Reverse a string using recursion
 6. *ContainsOnlyDigits* - Checks if given string only contains digits
 7. *ContainsOnlyDigitsUsingRegex* - Checks if given string only contains digits using Regular Expressions
+8. *CountVowels* - Count vowels in given string
+9. *CountConstants* - Count constants in a given string
