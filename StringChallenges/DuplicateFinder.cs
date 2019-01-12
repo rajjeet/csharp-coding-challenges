@@ -6,23 +6,9 @@ using NUnit.Framework;
 
 namespace StringChallenges
 {
-    public class FindDuplicates
+    public static class DuplicateFinder
     {
-        [Test]
-        public void FindDuplicates_ReturnsCorrectMapWithDuplicates_WhenProvidedString()
-        {
-            const string input = "Swiss Cheese";
-            var expected = new Dictionary<char, int>
-            {
-                {'s', 3}, {'e', 3}                
-            };
-            
-            var result = FindDuplicatesMethod(input);
-            
-            Assert.AreEqual(expected, result);
-        }
-
-        private static Dictionary<char, int> FindDuplicatesMethod(string input)
+        public static Dictionary<char, int> FindDuplicates(string input)
         {
             var charArray = input.ToCharArray();
             var result = new Dictionary<char, int>();
@@ -38,6 +24,24 @@ namespace StringChallenges
                 }
             }                     
             return result.Where(e => e.Value > 1).ToDictionary(i => i.Key, i => i.Value);
+        }
+    }
+
+    [TestFixture]
+    public class DuplicateFinderTests
+    {
+        [Test]
+        public void FindDuplicates_ReturnsCorrectMapWithDuplicates_WhenProvidedString()
+        {
+            const string input = "Swiss Cheese";
+            var expected = new Dictionary<char, int>
+            {
+                {'s', 3}, {'e', 3}                
+            };
+            
+            var result = DuplicateFinder.FindDuplicates(input);
+            
+            Assert.AreEqual(expected, result);
         }
     }
 }
