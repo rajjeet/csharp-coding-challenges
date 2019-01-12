@@ -60,18 +60,46 @@ namespace Challenges
                                     
             return string.Concat(ReverseStringRecursively(input.Substring(1)), input[0]);
         }
+
+        public static bool ContainsOnlyDigits(string input)
+        {
+            var charArray = input.ToCharArray();
+            return charArray.All(c => c >= '0' && c <= '9');
+            
+        }
     }
 
     public class StringUtilsTests
     {
+        [Test]
+        public void ContainsOnlyDigits_ReturnsTrue_WhenStringWithOnlyDigitsIsProvided()
+        {
+            const string input = "123456";
+            const bool expected = true;
 
+            var result = StringUtils.ContainsOnlyDigits(input);
+            
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void ContainsOnlyDigits_ReturnsFalse_WhenStringWitDigitsAndAlphabetsIsProvided()
+        {
+            const string input = "123456a";
+            const bool expected = false;
+
+            var result = StringUtils.ContainsOnlyDigits(input);
+            
+            Assert.AreEqual(expected, result);
+        }
+        
         [Test]
         public void ReverseStringRecursively_ReversesStringUsingRecursion_WhenStringWithEvenLengthIsProvided()
         {
-            const string sampleString = "cantaloupe";
+            const string input = "cantaloupe";
             const string expected = "epuolatnac";
 
-            var result = StringUtils.ReverseStringRecursively(sampleString);
+            var result = StringUtils.ReverseStringRecursively(input);
 
             Assert.AreEqual(expected, result);
         }
@@ -79,10 +107,10 @@ namespace Challenges
         [Test]
         public void ReverseStringRecursively_ReversesStringUsingRecursion_WhenStringWithOddLengthIsProvided()
         {
-            const string sampleString = "canoe";
+            const string input = "canoe";
             const string expected = "eonac";
 
-            var result = StringUtils.ReverseStringRecursively(sampleString);
+            var result = StringUtils.ReverseStringRecursively(input);
 
             Assert.AreEqual(expected, result);
         }
@@ -90,10 +118,10 @@ namespace Challenges
         [Test]
         public void ReverseStringIteratively_ReversesStringUsingIteration_WhenStringIsProvided()
         {
-            const string sampleString = "cantaloupe";
+            const string input = "cantaloupe";
             const string expected = "epuolatnac";
 
-            var result = StringUtils.ReverseStringIteratively(sampleString);
+            var result = StringUtils.ReverseStringIteratively(input);
 
             Assert.AreEqual(expected, result);
         }

@@ -13,3 +13,4 @@ Challenges
 3. *FindFirstNonRepeatingCharacter* - Finds first non-repeating character in a given string
 4. *ReverseStringIteratively* - Reverse a string using iterations
 5. *ReverseStringRecursively* - Reverse a string using recursion
+6. *ContainsOnlyDigits* - Checks if given string only contains digits
