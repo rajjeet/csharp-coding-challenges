@@ -87,10 +87,95 @@ namespace Challenges
             var vowels = new char[] {'a', 'e', 'i', 'o', 'u'};
             return charArray.Count(c => !vowels.Contains(c));
         }
+
+
+        public static IEnumerable<string> FindPermutations(string input)
+        {
+            var result = new List<string>();
+
+            FindPermutationsRaw("", input, result);
+
+            result.Sort();
+            return result;
+        }
+
+        private static void FindPermutationsRaw(string permutation, string input, ICollection<string> result)
+        {
+            if (input == "")
+            {
+                result.Add(permutation + input);
+            }
+            else
+            {
+                for (var i = 0; i < input.Length; i++)
+                {
+                    var selectedCharacter = input[i];
+                    var lengthAfterSelectedCharacter = input.Length - i - 1;
+                    var remainingCharacters = input.Substring(0, i) + input.Substring(i + 1, lengthAfterSelectedCharacter);
+                    var permutationAppend = permutation + selectedCharacter;                    
+                    FindPermutationsRaw(permutationAppend, remainingCharacters, result);
+                }
+            }
+        }
     }
 
     public class StringUtilsTests
     {
+        [Test]
+        public void FindPermutations_ReturnsListOfPermutations_GivenValidStringWith3Letters()
+        {
+            const string input = "car";
+            var expected = new List<string> {"car", "acr", "rca", "cra", "rac", "arc"};
+            expected.Sort();
+
+            var result = StringUtils.FindPermutations(input);
+
+            CollectionAssert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void FindPermutations_ReturnsListOfPermutations_GivenValidStringWith4Letters()
+        {
+            const string input = "care";
+            var expected = new List<string>
+            {
+                "acer", "acre", "aecr", "aerc", "arce", "arec", "caer", "care", "cear", "cera", "crae", "crea", "eacr",
+                "earc", "ecar", "ecra", "erac", "erca", "race", "raec", "rcae", "rcea", "reac", "reca"
+            };
+            expected.Sort();
+
+            var result = StringUtils.FindPermutations(input);
+
+            foreach (var t in result)
+            {
+                Console.WriteLine(t);
+            }
+
+            CollectionAssert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void FindPermutations_ReturnsListOfTwoPermutations_GivenAStringWithTwoCharacter()
+        {
+            const string input = "at";
+            var expected = new List<string> {"at", "ta"};
+
+            var result = StringUtils.FindPermutations(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void FindPermutations_ReturnsListOfSinglePermutation_GivenAStringWithSingleCharacter()
+        {
+            const string input = "a";
+            var expected = new List<string> {"a"};
+
+            var result = StringUtils.FindPermutations(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
         [Test]
         public void CountConstants_ReturnsConstantCount_WhenValidStringIsProvided()
         {
@@ -101,7 +186,7 @@ namespace Challenges
 
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void CountVowels_ReturnsVowelCount_WhenValidStringIsProvided()
         {

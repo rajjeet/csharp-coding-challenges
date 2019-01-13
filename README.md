@@ -17,3 +17,4 @@ Challenges
 7. *ContainsOnlyDigitsUsingRegex* - Checks if given string only contains digits using Regular Expressions
 8. *CountVowels* - Count vowels in given string
 9. *CountConstants* - Count constants in a given string
+10. *FindPermutations* - Find all permutations of a given string (includes duplicates)
