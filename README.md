@@ -18,3 +18,5 @@ Challenges
 8. *CountVowels* - Count vowels in given string
 9. *CountConstants* - Count constants in a given string
 10. *FindPermutations* - Find all permutations of a given string (includes duplicates)
+11. *CheckRotation* - Check if two strings are rotation of each other
+12. *IsPalindrome* - Check if given string is palindrome 

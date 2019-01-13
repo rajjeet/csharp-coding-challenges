@@ -88,7 +88,6 @@ namespace Challenges
             return charArray.Count(c => !vowels.Contains(c));
         }
 
-
         public static IEnumerable<string> FindPermutations(string input)
         {
             var result = new List<string>();
@@ -111,16 +110,165 @@ namespace Challenges
                 {
                     var selectedCharacter = input[i];
                     var lengthAfterSelectedCharacter = input.Length - i - 1;
-                    var remainingCharacters = input.Substring(0, i) + input.Substring(i + 1, lengthAfterSelectedCharacter);
-                    var permutationAppend = permutation + selectedCharacter;                    
+                    var remainingCharacters =
+                        input.Substring(0, i) + input.Substring(i + 1, lengthAfterSelectedCharacter);
+                    var permutationAppend = permutation + selectedCharacter;
                     FindPermutationsRaw(permutationAppend, remainingCharacters, result);
                 }
             }
+        }
+
+        public static string ReverseWords(string input)
+        {
+            var words = input.Split(' ');
+            var result = "";
+            for (var i = words.Length - 1; i >= 0; i--)
+            {
+                if (!string.IsNullOrEmpty(words[i]))
+                {
+                    result += $" {words[i].Trim()}";
+                }
+            }
+
+            return result.Trim();
+        }
+
+        public static bool CheckRotation(string string1, string string2)
+        {
+            if (string1.Length != string2.Length)
+            {
+                return false;
+            }
+            
+            var rotatedString = string1;
+            foreach (var iteration in string1)
+            {
+                rotatedString = RotateString(rotatedString);
+                if (rotatedString == string2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static string RotateString(string input)
+        {
+            return input.Substring(input.Length - 1, 1) + input.Substring(0, input.Length - 1);
+        }
+
+        public static bool IsPalindrome(string input)
+        {
+            var reverseString = ReverseStringRecursively(input);
+            return reverseString == input;
         }
     }
 
     public class StringUtilsTests
     {
+        
+        
+        [Test]
+        public void IsPalindrome_ReturnsFalse_WhenAPalindromeStringIsNotPassed()
+        {
+            const string input = "mommy";
+
+            var result = StringUtils.IsPalindrome(input);
+            
+            Assert.IsFalse(result);
+            
+        }
+        
+        [Test]
+        public void IsPalindrome_ReturnsTrue_WhenAPalindromeStringIsPassed()
+        {
+            const string input = "mom";
+
+            var result = StringUtils.IsPalindrome(input);
+            
+            Assert.IsTrue(result);
+            
+        }
+        
+        [Test]
+        public void RotateString_ReturnsStringRotatedToLeftBy1_WhenStringPassed()
+        {
+            const string input = "canoe";
+            const string expected = "ecano";
+
+            var result = StringUtils.RotateString(input);
+            
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void CheckRotation_ReturnsTrue_WhenTwoStringsArePassedThatAreRotationsOfOneAnother()
+        {
+            const string string1 = "IndiaUSAEngland";
+            const string string2 = "USAEnglandIndia";
+
+            var result = StringUtils.CheckRotation(string1, string2);
+            
+            Assert.IsTrue(result);
+        }        
+        
+        [Test]
+        public void CheckRotation_ReturnsTrue_WhenTwoStringsArePassedThatAreRotationsOfOneAnotherWithOnlyACharacterDifferenceAtTheEndOfRotation()
+        {
+            const string string1 = "SAEnglandIndiaU";
+            const string string2 = "USAEnglandIndia";
+
+            var result = StringUtils.CheckRotation(string1, string2);
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void CheckRotation_ReturnsFalse_WhenTwoStringsArePassedThatAreNotRotationsOfOneAnother()
+        {
+            const string string1 = "IndiaUSAEngland";
+            const string string2 = "USAEnglandCanada";
+
+            var result = StringUtils.CheckRotation(string1, string2);
+            
+            Assert.IsFalse(result);
+        }
+        
+        [Test]
+        public void ReverseWords_ReturnsStringWithReversedWords_WhenStringWithMultipleWordsIsPassed()
+        {
+            const string input = "This is a sample string";
+            const string expected = "string sample a is This";
+
+            var result = StringUtils.ReverseWords(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void
+            ReverseWords_ReturnsStringWithReversedWordsWithoutExtraWhitespace_WhenStringWithMultipleWordsWithExtraWhitespaceInBetweenIsPassed()
+        {
+            const string input = "This is a     sample    string";
+            const string expected = "string sample a is This";
+
+            var result = StringUtils.ReverseWords(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void ReverseWords_ReturnsSameInputWithTrimmedWhitespace_WhenSingleWordIsPassed()
+        {
+            const string input = "  Sample ";
+            const string expected = "Sample";
+
+            var result = StringUtils.ReverseWords(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
         [Test]
         public void FindPermutations_ReturnsListOfPermutations_GivenValidStringWith3Letters()
         {
