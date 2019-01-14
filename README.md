@@ -20,3 +20,6 @@ Challenges
 10. *FindPermutations* - Find all permutations of a given string (includes duplicates)
 11. *CheckRotation* - Check if two strings are rotation of each other
 12. *IsPalindrome* - Check if given string is palindrome 
+
+##### Binary Search Tree (BST) (*BinarySearchTree.cs*)
+1. *Add* - Adds a node to the BST
