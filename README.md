@@ -23,3 +23,8 @@ Challenges
 
 ##### Binary Search Tree (BST) (*BinarySearchTree.cs*)
 1. *Add* - Adds a node to the BST
+2. *Validate* - Check if tree is a valid BST
+
+* Supporting classes
+    * TreeNode.cs
+
