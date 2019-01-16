@@ -22,9 +22,9 @@ Challenges
 12. *IsPalindrome* - Check if given string is palindrome 
 
 ##### Binary Search Tree (BST) (*BinarySearchTree.cs*)
-1. *Add* - Adds a node to the BST
-2. *Validate* - Check if tree is a valid BST
+1. *Add* - Adds a node 
+2. *Validate* - Check if tree is a valid 
+3. *Remove* - Remove a node 
 
-* Supporting classes
-    * TreeNode.cs
+
 
