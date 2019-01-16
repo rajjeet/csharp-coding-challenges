@@ -25,7 +25,10 @@ namespace Challenges
 
         public BinarySearchTree(TreeNode rootTreeNode)
         {
-            RootTreeNode = rootTreeNode;
+            if (Validate(rootTreeNode))
+                RootTreeNode = rootTreeNode;
+            else
+                throw new ArgumentException("Invalid binary search tree provided to BinarySearchTree class");
         }
 
 
