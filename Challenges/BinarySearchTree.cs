@@ -31,17 +31,16 @@ namespace Challenges
                 throw new ArgumentException("Invalid binary search tree provided to BinarySearchTree class");
         }
 
-
-        public void Add(TreeNode nodeToAdd)
+        public void Add(int value)
         {
             var node = RootTreeNode;
             while (true)
             {
-                if (nodeToAdd.Value > node.Value)
+                if (value > node.Value)
                 {
                     if (node.Right == null)
                     {
-                        node.Right = nodeToAdd;
+                        node.Right = new TreeNode(value);
                     }
                     else
                     {
@@ -49,11 +48,11 @@ namespace Challenges
                         continue;
                     }
                 }
-                else if (nodeToAdd.Value < node.Value)
+                else if (value < node.Value)
                 {
                     if (node.Left == null)
                     {
-                        node.Left = nodeToAdd;
+                        node.Left = new TreeNode(value);
                     }
                     else
                     {
@@ -65,7 +64,6 @@ namespace Challenges
                 break;
             }
         }
-
 
         public static bool Validate(TreeNode node, int min = int.MinValue, int max = int.MaxValue)
         {
@@ -79,11 +77,24 @@ namespace Challenges
 
             return Validate(node.Left, min, node.Value - 1) && Validate(node.Right, node.Value + 1, max);
         }
+
+        public void Remove(int value)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
     public class BinarySearchTreeTests
     {
+        [Test]
+        public void Remove_RemovesLeafNode_WhenExists()
+        {
+            var rootTreeNode = new TreeNode(50) {Left = new TreeNode(25), Right = new TreeNode(1)};
+            var binarySearchTree = new BinarySearchTree(rootTreeNode);
+
+            binarySearchTree.Remove(1);
+        }
         
         [Test]
         public void Validate_ReturnsFalse_WhenInValidBinarySearchTreeWithDepthOf1IsProvided()
@@ -455,11 +466,11 @@ namespace Challenges
         {
             var rootTreeNode = new TreeNode(10);
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
-            var nodeToAdd = new TreeNode(20);
+            var expected = 20;
 
-            binarySearchTree.Add(nodeToAdd);
+            binarySearchTree.Add(expected);
 
-            Assert.AreEqual(nodeToAdd, binarySearchTree.RootTreeNode.Right);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Right.Value);
         }
 
         [Test]
@@ -467,11 +478,11 @@ namespace Challenges
         {
             var rootTreeNode = new TreeNode(10);
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
-            var nodeToAdd = new TreeNode(5);
+            var expected = 5;
 
-            binarySearchTree.Add(nodeToAdd);
+            binarySearchTree.Add(expected);
 
-            Assert.AreEqual(nodeToAdd, binarySearchTree.RootTreeNode.Left);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Left.Value);
         }
 
         [Test]
@@ -481,11 +492,11 @@ namespace Challenges
             var node1 = new TreeNode(5);
             rootTreeNode.Left = node1;
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
+            var expected = 3;
+            
+            binarySearchTree.Add(expected);
 
-            var nodeToAdd = new TreeNode(3);
-            binarySearchTree.Add(nodeToAdd);
-
-            Assert.AreEqual(nodeToAdd, binarySearchTree.RootTreeNode.Left.Left);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Left.Left.Value);
         }
 
         [Test]
@@ -494,12 +505,12 @@ namespace Challenges
             var rootTreeNode = new TreeNode(10);
             var node1 = new TreeNode(5);
             rootTreeNode.Left = node1;
-            var binarySearchTree = new BinarySearchTree(rootTreeNode);
+            var binarySearchTree = new BinarySearchTree(rootTreeNode);            
+            var expected = 7;
+            
+            binarySearchTree.Add(expected);
 
-            var nodeToAdd = new TreeNode(7);
-            binarySearchTree.Add(nodeToAdd);
-
-            Assert.AreEqual(nodeToAdd, binarySearchTree.RootTreeNode.Left.Right);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Left.Right.Value);
         }
 
         [Test]
@@ -509,11 +520,11 @@ namespace Challenges
             var node1 = new TreeNode(5);
             rootTreeNode.Left = node1;
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
-            ;
-            var nodeToAdd = new TreeNode(7);
-            binarySearchTree.Add(nodeToAdd);
+            var expected = 1;
+            
+            binarySearchTree.Add(expected);
 
-            Assert.AreEqual(node1.Right, nodeToAdd);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Left.Left.Value);
         }
 
         [Test]
@@ -523,11 +534,11 @@ namespace Challenges
             var node1 = new TreeNode(5);
             rootTreeNode.Left = node1;
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
+            var expected = 7;
+            
+            binarySearchTree.Add(expected);
 
-            var nodeToAdd = new TreeNode(1);
-            binarySearchTree.Add(nodeToAdd);
-
-            Assert.AreEqual(node1.Left, nodeToAdd);
+            Assert.AreEqual(expected,binarySearchTree.RootTreeNode.Left.Right.Value);
         }
 
         [Test]
@@ -537,11 +548,11 @@ namespace Challenges
             var node1 = new TreeNode(5);
             rootTreeNode.Left = node1;
             var binarySearchTree = new BinarySearchTree(rootTreeNode);
+            var expected = 5;
+            
+            binarySearchTree.Add(expected);
 
-            var nodeToAdd = new TreeNode(5);
-            binarySearchTree.Add(nodeToAdd);
-
-            Assert.AreEqual(node1, binarySearchTree.RootTreeNode.Left);
+            Assert.AreEqual(expected, binarySearchTree.RootTreeNode.Left.Value);
             Assert.IsNull(binarySearchTree.RootTreeNode.Left.Left);
             Assert.IsNull(binarySearchTree.RootTreeNode.Left.Right);
         }
