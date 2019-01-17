@@ -117,6 +117,44 @@ namespace Challenges
 
             return result;
         }
+
+        public static int CountLeafNodes(TreeNode node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            if (node.Left == null && node.Right == null)
+            {
+                return 1;
+            }
+
+            return new[] {CountLeafNodes(node.Left), CountLeafNodes(node.Right)}.Aggregate((x, y) => x + y);
+        }
+
+        public static int CountLeafNodesWithoutRecursion(TreeNode treeNode)
+        {
+            var stack = new Stack<TreeNode>();
+            var count = 0;
+            stack.Push(treeNode);
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
+                if (node.Left == null && node.Right == null)
+                {
+                    count++;
+                }
+
+                if (node.Left != null)
+                    stack.Push(node.Left);
+
+                if (node.Right != null)
+                    stack.Push(node.Right);
+            }
+
+            return count;
+        }
     }
 
     [TestFixture]
@@ -217,6 +255,26 @@ namespace Challenges
             var expected = new int[] {4, 12, 10, 18, 24, 22, 15, 31, 44, 35, 60, 66, 90, 70, 50, 25};
 
             var result = TreeNode.PostOrderWithoutRecursion(_treeNode);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void CountLeafNodes_WhenCalled_ReturnsCountOfNodesWithoutChildren()
+        {
+            const int expected = 8;
+
+            var result = TreeNode.CountLeafNodes(_treeNode);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void CountLeafNodesWithoutRecursion_WhenCalled_ReturnsCountOfNodesWithoutChildren()
+        {
+            const int expected = 8;
+
+            var result = TreeNode.CountLeafNodesWithoutRecursion(_treeNode);
 
             Assert.AreEqual(expected, result);
         }

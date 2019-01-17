@@ -33,3 +33,5 @@ Challenges
 4. *PreOrderWithoutRecursion* - PreOrder Traversal Algorithm w/o recursion
 5. *InOrderWithoutRecursion* - InOrder Traversal Algorithm w/o recursion
 6. *PostOrderWithoutRecursion* - PostOrder Traversal Algorithm w/o recursion
+7. *CountLeafNodes* - Count all leaf nodes using recursion
+8. *CountLeafNodesWithoutRecursion* - Count all leaf nodes w/o recursion
