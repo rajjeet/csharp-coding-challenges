@@ -23,8 +23,15 @@ Challenges
 
 ##### Binary Search Tree (BST) (*BinarySearchTree.cs*)
 1. *Add* - Adds a node 
-2. *Validate* - Check if tree is a valid 
+2. *Validate* - Check if tree is valid 
 3. *Remove* - Remove a node 
 
-
-
+##### TreeNode (*TreeNode.cs*)
+1. *PreOrder* - PreOrder Traversal Algorithm
+2. *InOrder* - InOrder Traversal Algorithm
+3. *PostOrder* - PostOrder Traversal Algorithm
+4. *PreOrderWithoutRecursion* - PreOrder Traversal Algorithm w/o recursion
+5. *InOrderWithoutRecursion* - InOrder Traversal Algorithm w/o recursion
+6. *PostOrderWithoutRecursion* - PostOrder Traversal Algorithm w/o recursion
+7. *CountLeafNodes* - Count all leaf nodes using recursion
+8. *CountLeafNodesWithoutRecursion* - Count all leaf nodes w/o recursion
