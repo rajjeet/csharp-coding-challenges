@@ -36,4 +36,8 @@ Challenges
 7. *CountLeafNodes* - Count all leaf nodes using recursion
 8. *CountLeafNodesWithoutRecursion* - Count all leaf nodes w/o recursion
 
+##### Sorting (*Sorting.cs*)
+1. *BubbleSort* - The bubble sorting algorithm
+
 ##### Miscellaneous (*Miscellaneous.cs*)
+1. *FindUsingBinarySearch* - Find array index of element using binary search
