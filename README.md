@@ -38,6 +38,7 @@ Challenges
 
 ##### Sorting (*Sorting.cs*)
 1. *BubbleSort* - The bubble sorting algorithm
+2. *QuickSort* - The QuickSort algorithm using recursion
 
 ##### Miscellaneous (*Miscellaneous.cs*)
 1. *FindUsingBinarySearch* - Find array index of element using binary search
