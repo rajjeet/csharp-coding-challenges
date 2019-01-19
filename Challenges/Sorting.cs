@@ -79,16 +79,17 @@ namespace Challenges
                         elementToCompare = array[pointOfInsert];
                         if (elementToSort > elementToCompare)
                         {
-                            ShiftRight(array, pointOfInsert + 1, currentIndex);                            
+                            ShiftRight(array, pointOfInsert + 1, currentIndex);
                             break;
                         }
 
                         if (pointOfInsert == 0)
                         {
-                            ShiftRight(array, pointOfInsert, currentIndex);                            
+                            ShiftRight(array, pointOfInsert, currentIndex);
                             break;
                         }
-                    }                                                          
+                    }
+
                     break;
                 }
             }
@@ -114,18 +115,166 @@ namespace Challenges
 
             array[targetIndex] = temp;
         }
+
+        public static int[] MergeSort(int[] array)
+        {
+            if (array.Length < 2) return array;
+
+            var leftSide = MergeSort(array.Take(array.Length / 2).ToArray());
+            var rightSide = MergeSort(array.Skip(array.Length / 2).ToArray());
+
+            return Merge(leftSide, rightSide);
+        }
+
+        public static int[] Merge(int[] array1, int[] array2)
+        {
+            var result = new int[0];
+            var array1IndexCount = 0;
+            var array2IndexCount = 0;
+            while (array1IndexCount < array1.Length && array2IndexCount < array2.Length)
+            {
+                if (array1[array1IndexCount] < array2[array2IndexCount])
+                {
+                    result = result.Concat(new[] {array1[array1IndexCount]}).ToArray();
+                    array1IndexCount++;
+                }
+                else
+                {
+                    result = result.Concat(new[] {array2[array2IndexCount]}).ToArray();
+                    array2IndexCount++;
+                }
+            }
+
+            while (array1IndexCount < array1.Length)
+            {
+                result = result.Concat(new[] {array1[array1IndexCount]}).ToArray();
+                array1IndexCount++;
+            }
+
+            while (array2IndexCount < array2.Length)
+            {
+                result = result.Concat(new[] {array2[array2IndexCount]}).ToArray();
+                array2IndexCount++;
+            }
+
+            return result;
+        }
     }
 
     public class SortingTest
     {
         [Test]
-        public void ShiftRight_MovesASingleElementFromLeftToRightAndShiftArrayToRight_WhenArrayPassedWithMultipleElements()
+        public void Merge_MergesTwoArraysIntoOne_WhenTwoArraysOfEqualLengthsPassed()
+        {
+            var array1 = new int[] {1, 3, 5};
+            var array2 = new int[] {2, 4, 6};
+            var expected = new List<int> {1, 2, 3, 4, 5, 6};
+
+            var result = Sorting.Merge(array1, array2);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Merge_MergesTwoArraysIntoOne_WhenOneArraysIsEmpty()
+        {
+            var array1 = new int[] {1, 3, 5};
+            var array2 = new int[] { };
+            var expected = new List<int> {1, 3, 5};
+
+            var result = Sorting.Merge(array1, array2);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Merge_MergesTwoArraysIntoOne_WhenBothArraysAreEmpty()
+        {
+            var array1 = new int[] { };
+            var array2 = new int[] { };
+            var expected = new List<int> { };
+
+            var result = Sorting.Merge(array1, array2);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Merge_MergesTwoArraysIntoOne_WhenArraysAreNotEqualSize()
+        {
+            var array1 = new int[] {1, 3, 5, 7};
+            var array2 = new int[] {2, 4, 6, 8, 9, 10};
+            var expected = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+            var result = Sorting.Merge(array1, array2);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MergeSort_SortsArray_WhenArrayWithOddNumberOfElementsIsPassed()
+        {
+            var array = new int[] {6, 7, 9, 3, 8, 4, 2};
+            var expected = new List<int> {2, 3, 4, 6, 7, 8, 9};
+
+            var result = Sorting.MergeSort(array);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MergeSort_SortsArray_WhenArrayWithEvenNumberOfElementsIsPassed()
+        {
+            var array = new int[] {6, 7, 9, 3, 8, 4, 2, 5};
+            var expected = new List<int> {2, 3, 4, 5, 6, 7, 8, 9};
+
+            var result = Sorting.MergeSort(array);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MergeSort_SortsArray_WhenArrayWithTwoNumberOfElementsIsPassed()
+        {
+            var array = new int[] {3, 1};
+            var expected = new List<int> {1, 3};
+
+            var result = Sorting.MergeSort(array);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MergeSort_SortsArray_WhenArrayWithOneNumberOfElementsIsPassed()
+        {
+            var array = new int[] {1};
+            var expected = new List<int> {1};
+
+            var result = Sorting.MergeSort(array);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MergeSort_SortsArray_WhenArrayWithNoNumberOfElementsIsPassed()
+        {
+            var array = new int[] { };
+            var expected = new List<int> { };
+
+            var result = Sorting.MergeSort(array);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void
+            ShiftRight_MovesASingleElementFromLeftToRightAndShiftArrayToRight_WhenArrayPassedWithMultipleElements()
         {
             var array = new int[] {6, 7, 9, 3, 8, 4, 2};
             var expected = new List<int> {6, 4, 7, 9, 3, 8, 2};
-            
+
             Sorting.ShiftRight(array, 1, 5);
-            
+
             Assert.AreEqual(expected, array);
         }
 
@@ -133,44 +282,44 @@ namespace Challenges
         public void InsertionSort_SortsList_WhenArrayWithMultipleElementsIdProvided()
         {
             var array = new int[] {6, 7, 9, 3, 8, 4, 2};
-            
+
             var expected = new int[] {2, 3, 4, 6, 7, 8, 9};
 
             var result = Sorting.InsertionSort(array);
 
             CollectionAssert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void InsertionSort_SortsList_WhenArrayWithTwoElementsIdProvided()
         {
             var array = new int[] {8, 7};
-            
+
             var expected = new int[] {7, 8};
 
             var result = Sorting.InsertionSort(array);
 
             CollectionAssert.AreEqual(expected, result);
-        }        
-        
+        }
+
         [Test]
         public void InsertionSort_SortsList_WhenArrayWithOneElementIdProvided()
         {
             var array = new int[] {2};
-            
+
             var expected = new int[] {2};
 
             var result = Sorting.InsertionSort(array);
 
             CollectionAssert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void InsertionSort_SortsList_WhenArrayWithNoElementIdProvided()
         {
-            var array = new int[] {};
-            
-            var expected = new int[] {};
+            var array = new int[] { };
+
+            var expected = new int[] { };
 
             var result = Sorting.InsertionSort(array);
 

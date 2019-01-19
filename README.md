@@ -40,6 +40,7 @@ Challenges
 1. *BubbleSort* 
 2. *QuickSort* 
 3. *InsertionSort*  
+4. *MergeSort*
 
 ##### Miscellaneous (*Miscellaneous.cs*)
 1. *FindUsingBinarySearch* - Find array index of element using binary search
