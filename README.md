@@ -36,11 +36,11 @@ Challenges
 7. *CountLeafNodes* - Count all leaf nodes using recursion
 8. *CountLeafNodesWithoutRecursion* - Count all leaf nodes w/o recursion
 
-##### Sorting (*Sorting.cs*)
-1. *BubbleSort* 
-2. *QuickSort* 
-3. *InsertionSort*  
-4. *MergeSort*
+##### Sorting (*Sorting.cs*) - with time complexity
+1. *BubbleSort* - Average & Worst: O(n<sup>2</sup>) and Best: O(n)
+2. *QuickSort*  - Average & Best: O(n log n) and Worst: O(n<sup>2</sup>) 
+3. *InsertionSort* - Average & Worst: O(n<sup>2</sup>) and Best: O(n)
+4. *MergeSort* - O(n log n)
 
 ##### Miscellaneous (*Miscellaneous.cs*)
 1. *FindUsingBinarySearch* - Find array index of element using binary search
