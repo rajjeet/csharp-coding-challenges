@@ -27,9 +27,9 @@ Challenges
 3. *Remove* - Remove a node 
 
 ##### TreeNode (*TreeNode.cs*)
-1. *PreOrder* - PreOrder Traversal Algorithm
-2. *InOrder* - InOrder Traversal Algorithm
-3. *PostOrder* - PostOrder Traversal Algorithm
+1. *PreOrder* - PreOrder Traversal Algorithm (node-left-right) - ideal for printing hierarchy
+2. *InOrder* - InOrder Traversal Algorithm (left-node-right) - ideal for printing sequence for BST
+3. *PostOrder* - PostOrder Traversal Algorithm (left-right-node) - ideal for performing tree-based operations
 4. *PreOrderWithoutRecursion* - PreOrder Traversal Algorithm w/o recursion
 5. *InOrderWithoutRecursion* - InOrder Traversal Algorithm w/o recursion
 6. *PostOrderWithoutRecursion* - PostOrder Traversal Algorithm w/o recursion
@@ -37,8 +37,9 @@ Challenges
 8. *CountLeafNodesWithoutRecursion* - Count all leaf nodes w/o recursion
 
 ##### Sorting (*Sorting.cs*)
-1. *BubbleSort* - The bubble sorting algorithm
-2. *QuickSort* - The QuickSort algorithm using recursion
+1. *BubbleSort* 
+2. *QuickSort* 
+3. *InsertionSort*  
 
 ##### Miscellaneous (*Miscellaneous.cs*)
 1. *FindUsingBinarySearch* - Find array index of element using binary search

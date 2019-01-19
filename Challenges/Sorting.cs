@@ -62,18 +62,119 @@ namespace Challenges
 
             return QuickSort(leftSide).Concat(middle).Concat(QuickSort(rightSide)).ToArray();
         }
+
+        public static int[] InsertionSort(int[] array)
+        {
+            for (var currentIndex = 1; currentIndex < array.Length; currentIndex++)
+            {
+                var pointOfInsert = currentIndex - 1;
+                while (true)
+                {
+                    var elementToSort = array[currentIndex];
+                    var elementToCompare = array[pointOfInsert];
+
+                    while (elementToSort < elementToCompare)
+                    {
+                        if (pointOfInsert > 0) pointOfInsert--;
+                        elementToCompare = array[pointOfInsert];
+                        if (elementToSort > elementToCompare)
+                        {
+                            ShiftRight(array, pointOfInsert + 1, currentIndex);                            
+                            break;
+                        }
+
+                        if (pointOfInsert == 0)
+                        {
+                            ShiftRight(array, pointOfInsert, currentIndex);                            
+                            break;
+                        }
+                    }                                                          
+                    break;
+                }
+            }
+
+            return array;
+        }
+
+        public static void ShiftRight(int[] array, int targetIndex, int indexToInsert)
+        {
+            var temp = array[indexToInsert];
+
+            for (var i = indexToInsert; i > 0; i--)
+            {
+                if (i >= targetIndex)
+                {
+                    array[i] = array[i - 1];
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            array[targetIndex] = temp;
+        }
     }
 
     public class SortingTest
     {
         [Test]
-        public void Test()
+        public void ShiftRight_MovesASingleElementFromLeftToRightAndShiftArrayToRight_WhenArrayPassedWithMultipleElements()
         {
             var array = new int[] {6, 7, 9, 3, 8, 4, 2};
-            foreach (var i in array.Skip(4))
-            {
-                Console.WriteLine(i);
-            }
+            var expected = new List<int> {6, 4, 7, 9, 3, 8, 2};
+            
+            Sorting.ShiftRight(array, 1, 5);
+            
+            Assert.AreEqual(expected, array);
+        }
+
+        [Test]
+        public void InsertionSort_SortsList_WhenArrayWithMultipleElementsIdProvided()
+        {
+            var array = new int[] {6, 7, 9, 3, 8, 4, 2};
+            
+            var expected = new int[] {2, 3, 4, 6, 7, 8, 9};
+
+            var result = Sorting.InsertionSort(array);
+
+            CollectionAssert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void InsertionSort_SortsList_WhenArrayWithTwoElementsIdProvided()
+        {
+            var array = new int[] {8, 7};
+            
+            var expected = new int[] {7, 8};
+
+            var result = Sorting.InsertionSort(array);
+
+            CollectionAssert.AreEqual(expected, result);
+        }        
+        
+        [Test]
+        public void InsertionSort_SortsList_WhenArrayWithOneElementIdProvided()
+        {
+            var array = new int[] {2};
+            
+            var expected = new int[] {2};
+
+            var result = Sorting.InsertionSort(array);
+
+            CollectionAssert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void InsertionSort_SortsList_WhenArrayWithNoElementIdProvided()
+        {
+            var array = new int[] {};
+            
+            var expected = new int[] {};
+
+            var result = Sorting.InsertionSort(array);
+
+            CollectionAssert.AreEqual(expected, result);
         }
 
         [Test]
@@ -86,7 +187,7 @@ namespace Challenges
 
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void QuickSort_SortsList_WhenArrayWithEvenElementsIsProvided()
         {
@@ -97,7 +198,7 @@ namespace Challenges
 
             Assert.AreEqual(expected, result);
         }
-        
+
         [Test]
         public void QuickSort_SortsList_WhenArrayWithSingleElementsIsProvided()
         {
@@ -107,19 +208,19 @@ namespace Challenges
             var result = Sorting.QuickSort(array);
 
             Assert.AreEqual(expected, result);
-        }        
-        
+        }
+
         [Test]
         public void QuickSort_SortsList_WhenArrayWithNoElementsIsProvided()
         {
-            var array = new int[] {};
-            var expected = new int[] {};
+            var array = new int[] { };
+            var expected = new int[] { };
 
             var result = Sorting.QuickSort(array);
 
             Assert.AreEqual(expected, result);
-        }        
-        
+        }
+
         [Test]
         public void QuickSort_SortsList_WhenArrayWithTwoElementsIsProvided()
         {
