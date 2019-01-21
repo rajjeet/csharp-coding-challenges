@@ -44,3 +44,10 @@ Challenges
 
 ##### Miscellaneous (*Miscellaneous.cs*)
 1. *FindUsingBinarySearch* - Find array index of element using binary search
+2. *CalculateFibonacciRecursively* - Calculate Fibonacci using recursion
+3. *CalculateFibonacciDynamically* - Calculate Fibonacci using a cache
+4. *CalculateFibonacciIteratively* - Calculate Fibonacci using iterations
+
+##### Heap (*Heap.cs*)
+1. *MinHeap* - Priority queue based on min heap (Add, Remove, GetMin)
+2. *MinHeapArray* - Min heap implmented as an array (Add, Remove, GetMin)
