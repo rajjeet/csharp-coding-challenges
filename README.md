@@ -51,3 +51,6 @@ Challenges
 ##### Heap (*Heap.cs*)
 1. *MinHeap* - Priority queue based on min heap (Add, Remove, GetMin)
 2. *MinHeapArray* - Min heap implmented as an array (Add, Remove, GetMin)
+
+##### Dynamic Programming 
+1. *KnapsackProblem.cs* - Bottom up approach by building cache before converging to a solution

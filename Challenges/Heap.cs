@@ -345,12 +345,6 @@ namespace Challenges
     public class MinHeapArrayTests
     {
         [Test]
-        public void Test()
-        {
-            Assert.IsTrue(1 / 2 == 0);
-        }
-
-        [Test]
         public void Add_AddsNode_WhenTreeConsistsOfSingleNode()
         {
             var minHeap = new MinHeapArray<int>(3);
